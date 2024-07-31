@@ -4,6 +4,9 @@
   "description": "Repo for the final sprint for Database and Fullstack",
   "main": "index.js",
   "scripts": {
+    
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +15,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.18.0",

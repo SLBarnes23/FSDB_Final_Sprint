@@ -45,4 +45,4 @@ app.use('/api', apiRouter);
 
 app.use((req, res) => {
     res.status(404).render('404', {status: req.session.status});
-});
+  });
