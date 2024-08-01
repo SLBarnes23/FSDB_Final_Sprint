@@ -6,7 +6,7 @@ async function getFullText(fulltext) {
   try {
     await dal.connect();
     const database = dal.db("Recipeideas");
-    const collection = database.collection("recipes");
+    const collection = database.collection("Recipes");
     const result = await collection.find({ $text: { $search: fulltext } }).toArray();
     return result;
   } catch(err) {

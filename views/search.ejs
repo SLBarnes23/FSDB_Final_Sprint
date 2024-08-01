@@ -11,7 +11,11 @@
                         <b>Ingredients:</b> <%= item.ingredients.join(', ') %></br>
                         <b>Instructions:</b> <%= item.instructions %></br>
                         <b>Cuisine:</b> <%= item.cuisine %></br>
-                        <b>Dietary Restrictions:</b> <%= item.dietaryRestrictions.join(', ') %></br>
+                        <% if (item.dietaryRestrictions && Array.isArray(item.dietaryRestrictions)) { %>
+                            <b>Dietary Restrictions:</b> <%= item.dietaryRestrictions.join(', ') %></br>
+                        <% } else { %>
+                            <b>Dietary Restrictions:</b> None</br>
+                        <% } %>
                         <b>Prep Time:</b> <%= item.prepTime %> minutes</br>
                         <b>Cook Time:</b> <%= item.cookTime %> minutes</br>
                         <b>Nutrition:</b> Calories: <%= item.nutrition.calories %>, Protein: <%= item.nutrition.protein %>g, Fat: <%= item.nutrition.fat %>g, Carbs: <%= item.nutrition.carbs %>g</br>
@@ -35,4 +39,4 @@
         <%- include('./partials/auth.ejs') %>
     </body>
     <%- include('./partials/footer.ejs') %>
-    </html>
+</html>
