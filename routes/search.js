@@ -19,10 +19,6 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    // const theResults = [
-    //      {make:"Tesla",model:"Model 3",description:"Sleek, electric, eco-friendly sedan for a sustainable future."},
-    //      {make:"Chevrolet",model:"Malibu",description:"Midsize sedan with sleek design and modern tech."}
-    // ];
     let theResults = await mDal.getFullText(req.body.keyword); 
     myEventEmitter.emit('event', 'app.post /search', 'INFO', 'search page (search.ejs) was displayed.');
     res.render('search', {status: req.session.status, theResults});
