@@ -4,7 +4,7 @@ const dal = require("./m.db");
 async function getLogins() {
   try {
     await dal.connect();
-    const cursor = dal.db("Auth").collection("logins").find();
+    const cursor = dal.db("Recipeideas").collection("logins").find();
     const results = await cursor.toArray();
     return results;
   } catch(error) {
@@ -15,7 +15,7 @@ async function getLoginByUsername(name) {
   try {
     await dal.connect();
     // const result = await dal.db("Author").collection("logins").findOne({"username": name});
-    const result = await dal.db("Auth").collection("logins").findOne({"username": name});
+    const result = await dal.db("Recipeideas").collection("logins").findOne({"username": name});
     if(DEBUG) console.log('m.auth.dal.getLoginByUsername() _id: ' + result._id);
     return result;
   } catch(error) {
@@ -25,7 +25,7 @@ async function getLoginByUsername(name) {
 async function getLoginByEmail(email) {
   try {
     await dal.connect();
-    const result = await dal.db("Auth").collection("logins").findOne({ "email": email });
+    const result = await dal.db("Recipeideas").collection("logins").findOne({ "email": email });
     return result;
   } catch(error) {
     console.log(error);
@@ -34,7 +34,7 @@ async function getLoginByEmail(email) {
 async function getLoginById(id) {
   try {
     await dal.connect();
-    const result = await dal.db("Auth").collection("logins").findOne({ _id: new ObjectId(id) });
+    const result = await dal.db("Recipeideas").collection("logins").findOne({ _id: new ObjectId(id) });
     return result;
   } catch(error) {
     console.log(error);
@@ -52,7 +52,7 @@ async function addLogin(name, email, password, uuidv4) {
   
   try {
     await dal.connect();
-    const result = await dal.db("Auth").collection("logins").insertOne(newLogin);
+    const result = await dal.db("Recipeideas").collection("logins").insertOne(newLogin);
     return result.insertedId;
   } catch(error) {
     if(error.code === 11000)
