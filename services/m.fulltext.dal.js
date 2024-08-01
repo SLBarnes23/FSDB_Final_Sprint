@@ -5,8 +5,8 @@ async function getFullText(fulltext) {
   if(DEBUG) console.log("mongo.dal.getFullText()");
   try {
     await dal.connect();
-    const database = dal.db("Auth");
-    const collection = database.collection("autos");
+    const database = dal.db("Recipeideas");
+    const collection = database.collection("recipes");
     const result = await collection.find({ $text: { $search: fulltext } }).toArray();
     return result;
   } catch(err) {

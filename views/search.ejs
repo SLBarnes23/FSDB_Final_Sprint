@@ -7,23 +7,32 @@
                 </br> 
                 <% if (theResults.length > 0) { %>
                     <% theResults.forEach(item => { %>
-                        <b><%= item.make %> <%= item.model %></b> - 
-                        <%= item.description %> </br>
+                        <b><%= item.title %></b></br>
+                        <b>Ingredients:</b> <%= item.ingredients.join(', ') %></br>
+                        <b>Instructions:</b> <%= item.instructions %></br>
+                        <b>Cuisine:</b> <%= item.cuisine %></br>
+                        <b>Dietary Restrictions:</b> <%= item.dietaryRestrictions.join(', ') %></br>
+                        <b>Prep Time:</b> <%= item.prepTime %> minutes</br>
+                        <b>Cook Time:</b> <%= item.cookTime %> minutes</br>
+                        <b>Nutrition:</b> Calories: <%= item.nutrition.calories %>, Protein: <%= item.nutrition.protein %>g, Fat: <%= item.nutrition.fat %>g, Carbs: <%= item.nutrition.carbs %>g</br>
+                        <b>Rating:</b> <%= item.rating %></br>
+                        <b>Author:</b> <%= item.author %></br>
+                        </br>
                     <% }) %>
                 <% } else { %>
                     <p>No search results.</p>
                 <% } %>
-            </br><label>Auto Search:</label></br>
-            <label>Keyword:
-                <input type="text" id="keyword" name="keyword" value="<%= locals.keyword %>" required>
-            </label>
-            </br>
-            <button>POST</button>
-        </form>
+                </br><label>Recipe Search:</label></br>
+                <label>Keyword:
+                    <input type="text" id="keyword" name="keyword" value="<%= locals.keyword %>" required>
+                </label>
+                </br>
+                <button>POST</button>
+            </form>
         </div>
         <%- include('./partials/status.ejs') %>
         </br>
         <%- include('./partials/auth.ejs') %>
     </body>
     <%- include('./partials/footer.ejs') %>
-</html>
+    </html>
