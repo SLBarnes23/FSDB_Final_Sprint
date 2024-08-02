@@ -1,4 +1,8 @@
 <html lang="en">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/738bb60142.js" crossorigin="anonymous"></script>
     <div class="transparentbox">
     <%- include('./partials/header.ejs') %>
     <body>
@@ -51,17 +55,23 @@
                     <p>No search results.</p>
                 <% } %>
                 </br><label>Recipe Search:</label></br>
+                <br>
                 <label>Keyword:
                     <input type="text" id="keyword" name="keyword" value="<%= locals.keyword %>" required>
                 </label>
                 </br>
-                <button>POST</button>
+                <br>
+                <button>SEARCH</button>
             </form>
         </div>
+        <br>
         <%- include('./partials/status.ejs') %>
+        <br>
         </br>
         <%- include('./partials/auth.ejs') %>
+        <br>
     </body>
-    <%- include('./partials/footer.ejs') %>
     </div>
+    <%- include('./partials/footer.ejs') %>
+   
 </html>
