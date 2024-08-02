@@ -8,6 +8,7 @@ body {
     background-image: url("/images/image-from-rawpixel-id-5926619-original.jpg"); /* Background image */
     background-repeat: no-repeat; /* Prevents background image from repeating */
     background-size: cover; /* Scales the background image to cover the entire area */
+    background-position: center; /* Center the image */
     text-align: center; /* Center-aligns text */
 }
 
@@ -35,6 +36,7 @@ ul li {
 a {
     text-decoration: none; /* Removes underline from links */
     color: #1288d6; /* Blue color for links */
+    font-size: 24px;
 }
 
 /* Link hover effect */
@@ -80,7 +82,7 @@ button:hover {
     width: 100px; /* Fixed width */
     text-align: center; /* Center-aligns text */
     align-content: center;
-    margin-left: 240px;
+    margin-left: 266px;
 }
 
 /* Header 1 specific styling */
@@ -90,6 +92,14 @@ h1 {
     font-weight: bolder;
     font-style: normal;
     font-size: 80px;
+}
+
+h2 {
+    font-family: "Grenze Gotisch", serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 40px;
 }
 
 /* Footer styling */
@@ -102,10 +112,20 @@ footer {
 }
 
 .transparentbox {
-    background-color: #ffffff64;
-    width: 1200px;
-    margin: 300px;
-    padding: 30px;
+    background-color: #ffffff71;
+    width: 1300px;
+    margin-right: 300px;
+    margin-left: 300px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    padding-right: 20x;
+    padding-left: 20px;
+}
+
+p {
+    font-size: 17px;
 }
 
 .navbox {

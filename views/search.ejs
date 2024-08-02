@@ -9,6 +9,14 @@
         <%- include('./partials/nav.ejs') %>
         <div class="search content">
             <form action="/search" method="POST">
+            </br><label><h2>Recipe Search:</h2></label></br>
+            <br>
+            <label>Keyword:
+                <input type="text" id="keyword" name="keyword" value="<%= locals.keyword %>" required>
+            </label>
+            </br>
+            <br>
+            <button>SEARCH</button>
                 </br> 
                 <% if (mongoResults.length > 0 || postgresResults.length > 0) { %>
                     <% if (mongoResults.length > 0) { %>
@@ -54,14 +62,7 @@
                 <% } else { %>
                     <p>No search results.</p>
                 <% } %>
-                </br><label>Recipe Search:</label></br>
-                <br>
-                <label>Keyword:
-                    <input type="text" id="keyword" name="keyword" value="<%= locals.keyword %>" required>
-                </label>
-                </br>
-                <br>
-                <button>SEARCH</button>
+
             </form>
         </div>
         <br>
@@ -70,6 +71,9 @@
         </br>
         <%- include('./partials/auth.ejs') %>
         <br>
+        <br>
+        <a href="#top">Back to top</a>
+
     </body>
     </div>
     <%- include('./partials/footer.ejs') %>

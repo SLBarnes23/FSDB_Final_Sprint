@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
             if(DEBUG) console.log('auth.post.getLoginByUsername().try _id: ' + user._id);
             req.session.user = user;
             req.session.token = token;
-            req.session.status = 'Happy for your return ' + user.username;
+            req.session.status = 'Thank you for logging into our service  ' + user.username;
             res.redirect('/');
             return;
         } else {
