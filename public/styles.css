@@ -1,0 +1,116 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif; /* Default font */
+    margin: 90px;
+    margin-right: 550px; /* Adjusts the right margin */
+    margin-left: 550px;  /* Adjusts the left margin */
+    padding: 0;
+    background-image: url("/images/image-from-rawpixel-id-5926619-original.jpg"); /* Background image */
+    background-repeat: no-repeat; /* Prevents background image from repeating */
+    background-size: cover; /* Scales the background image to cover the entire area */
+    text-align: center; /* Center-aligns text */
+}
+
+/* Header styling */
+h1, h2, h3, h4, h5, h6 {
+    color: #333; /* Dark gray color for headers */
+}
+
+/* Unordered list styling */
+ul {
+    list-style: none; /* Removes bullet points */
+    padding: 0; /* Removes default padding */
+}
+
+/* List item styling */
+ul li {
+    background: #fff; /* White background */
+    margin: 10px 0; /* Vertical margin */
+    padding: 10px; /* Padding inside the list item */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Link styling */
+a {
+    text-decoration: none; /* Removes underline from links */
+    color: #1288d6; /* Blue color for links */
+}
+
+/* Link hover effect */
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Form styling */
+form {
+    display: inline; /* Displays form inline */
+}
+
+/* Button styling */
+button {
+    background-color: #e74c3c; /* Red background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 5px 10px; /* Padding inside the button */
+    border-radius: 3px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #57cf95; /* Darker red background on hover */
+}
+
+/* Custom title styling */
+.playwrite-title {
+    font-family: "Playwrite IS", cursive; /* Custom cursive font */
+    font-optical-sizing: auto;
+    font-weight: bold; /* Bold text */
+    font-style: bold; /* Bold style */
+    font-size: 60px; /* Large font size */
+}
+
+/* Box styling for text sections */
+.textbox {
+    border: 2px solid #383838; /* Dark gray border */
+    padding: 5px;
+    border-radius: 5px; /* Rounded corners */
+    background-color: #dee8d6; /* White background */
+    width: 100px; /* Fixed width */
+    text-align: center; /* Center-aligns text */
+    align-content: center;
+    margin-left: 240px;
+}
+
+/* Header 1 specific styling */
+h1 {
+    font-family: "Grenze Gotisch", serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 80px;
+}
+
+/* Footer styling */
+footer {
+    font-family: "Playwrite IS", cursive; /* Custom cursive font */
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: bold; /* Bold style */
+    font-size: 17px; /* Medium font size */
+}
+
+.transparentbox {
+    background-color: #ffffff64;
+    width: 1200px;
+    margin: 300px;
+    padding: 30px;
+}
+
+.navbox {
+    display:flex;
+    justify-content: space-between;
+    width: 700px;
+    font-size: 25px;
+}

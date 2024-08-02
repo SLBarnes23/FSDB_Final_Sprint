@@ -1,9 +1,14 @@
 <html lang="en">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/738bb60142.js" crossorigin="anonymous"></script>
+	<div class="transparentbox">
     <%- include('./partials/header.ejs') %>
     <body>
         <%- include('./partials/nav.ejs') %>
 		<div class="login">
-			<h1>Login</h1>
+			<h2>Login</h2>
 			<form action="/auth" method="post">
 				<label for="username"></label>
 				<input type="text" name="username" placeholder="Username" id="username" required></br>
@@ -12,9 +17,15 @@
 				<input type="submit" value="Login">
 			</form>
         </div>
+		<br>
 		<%- include('./partials/status.ejs') %>
+		<br>
 		</br>
+		<br>
         <%- include('./partials/auth.ejs') %>
+		<br>
     </body>
+</div>
     <%- include('./partials/footer.ejs') %>
+
 </html>
