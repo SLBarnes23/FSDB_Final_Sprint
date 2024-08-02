@@ -34,7 +34,7 @@ ul li {
 /* Link styling */
 a {
     text-decoration: none; /* Removes underline from links */
-    color: #3498db; /* Blue color for links */
+    color: #1288d6; /* Blue color for links */
 }
 
 /* Link hover effect */
@@ -59,7 +59,7 @@ button {
 
 /* Button hover effect */
 button:hover {
-    background-color: #c0392b; /* Darker red background on hover */
+    background-color: #57cf95; /* Darker red background on hover */
 }
 
 /* Custom title styling */
@@ -73,28 +73,30 @@ button:hover {
 
 /* Box styling for text sections */
 .textbox {
-    border: 2px #333; /* Dark gray border */
+    border: 2px solid #383838; /* Dark gray border */
+    padding: 5px;
     border-radius: 5px; /* Rounded corners */
-    background-color: #fff; /* White background */
-    width: 400px; /* Fixed width */
+    background-color: #dee8d6; /* White background */
+    width: 100px; /* Fixed width */
     text-align: center; /* Center-aligns text */
-    margin-left: 35%; /* Center alignment with left margin */
+    align-content: center;
+    margin-left: 240px;
 }
 
 /* Header 1 specific styling */
 h1 {
-    font-family: "Playwrite IS", cursive; /* Custom cursive font */
+    font-family: "Grenze Gotisch", serif;
     font-optical-sizing: auto;
-    font-weight: bold; /* Bold text */
-    font-style: bold; /* Bold style */
-    font-size: 60px; /* Large font size */
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 80px;
 }
 
 /* Footer styling */
 footer {
     font-family: "Playwrite IS", cursive; /* Custom cursive font */
     font-optical-sizing: auto;
-    font-weight: lighter; /* Lighter text weight */
+    font-weight: bold;
     font-style: bold; /* Bold style */
     font-size: 17px; /* Medium font size */
 }
@@ -103,4 +105,12 @@ footer {
     background-color: #ffffff64;
     width: 1200px;
     margin: 300px;
+    padding: 30px;
+}
+
+.navbox {
+    display:flex;
+    justify-content: space-between;
+    width: 700px;
+    font-size: 25px;
 }
