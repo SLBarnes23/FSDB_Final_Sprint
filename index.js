@@ -26,6 +26,12 @@ app.listen(PORT, (err) => {
     console.log(`Simple app running on port ${PORT}.`)
 });
 
+// Middleware to serve static files from the 'public' directory
+app.use(express.static('public'));
+
+// Middleware to serve static files from the 'images' directory
+app.use(express.static('images'));
+
 // Test route for PostgreSQL connection
 app.get('/test-db', async (req, res) => {
     try {
@@ -48,7 +54,7 @@ app.get('/test-search', async (req, res) => {
       res.status(500).send('Error fetching search results');
     }
   });
-  
+
 // Routes
 app.get('/', async (req, res) => {
     myEventEmitter.emit('event', 'app.get', 'INFO', 'landing page (index.ejs) was displayed.');
