@@ -19,10 +19,17 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    const { keyword, dataSource } = req.body;
+    let mongoResults = [];
+    let postgresResults = [];
+
     try {
-        // Query both data sources
-        const mongoResults = await mDal.getFullText(req.body.keyword);
-        const postgresResults = await pDal.getFullText(req.body.keyword);
+        if (dataSource === 'both' || dataSource === 'mongodb') {
+            mongoResults = await mDal.getFullText(keyword);
+        }
+        if (dataSource === 'both' || dataSource === 'postgresql') {
+            postgresResults = await pDal.getFullText(keyword);
+        }
 
         // Send results to the view
         myEventEmitter.emit('event', 'app.post /search', 'INFO', 'search results were displayed.');

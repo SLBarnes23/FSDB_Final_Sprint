@@ -1,81 +1,87 @@
 <html lang="en">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/738bb60142.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/738bb60142.js" crossorigin="anonymous"></script>
     <div class="transparentbox">
     <%- include('./partials/header.ejs') %>
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="search content">
             <form action="/search" method="POST">
-            </br><label><h2>Recipe Search:</h2></label></br>
-            <br>
-            <label>Keyword:
-                <input type="text" id="keyword" name="keyword" value="<%= locals.keyword %>" required>
-            </label>
-            </br>
-            <br>
-            <button>SEARCH</button>
-                </br> 
+                <br><label><h2>Recipe Search:</h2></label><br>
+                <br>
+                <label>Keyword:
+                    <input type="text" id="keyword" name="keyword" value="<%= locals.keyword %>" required>
+                </label>
+                <br>
+                <br>
+                <label>Data Source:
+                    <select id="dataSource" name="dataSource" required>
+                        <option value="both">Both</option>
+                        <option value="mongodb">MongoDB</option>
+                        <option value="postgresql">PostgreSQL</option>
+                    </select>
+                </label>
+                <br>
+                <br>
+                <button>SEARCH</button>
+                <br> 
                 <% if (mongoResults.length > 0 || postgresResults.length > 0) { %>
                     <% if (mongoResults.length > 0) { %>
                         <h3>MongoDB Results:</h3>
                         <% mongoResults.forEach(item => { %>
-                            <b><%= item.title %></b></br>
-                            <b>Ingredients:</b> <%= item.ingredients.join(', ') %></br>
-                            <b>Instructions:</b> <%= item.instructions %></br>
-                            <b>Cuisine:</b> <%= item.cuisine %></br>
+                            <b><%= item.title %></b><br>
+                            <b>Ingredients:</b> <%= item.ingredients.join(', ') %><br>
+                            <b>Instructions:</b> <%= item.instructions %><br>
+                            <b>Cuisine:</b> <%= item.cuisine %><br>
                             <% if (item.dietaryRestrictions && Array.isArray(item.dietaryRestrictions)) { %>
-                                <b>Dietary Restrictions:</b> <%= item.dietaryRestrictions.join(', ') %></br>
+                                <b>Dietary Restrictions:</b> <%= item.dietaryRestrictions.join(', ') %><br>
                             <% } else { %>
-                                <b>Dietary Restrictions:</b> None</br>
+                                <b>Dietary Restrictions:</b> None<br>
                             <% } %>
-                            <b>Prep Time:</b> <%= item.prepTime %> minutes</br>
-                            <b>Cook Time:</b> <%= item.cookTime %> minutes</br>
-                            <b>Nutrition:</b> Calories: <%= item.nutrition.calories %>, Protein: <%= item.nutrition.protein %>g, Fat: <%= item.nutrition.fat %>g, Carbs: <%= item.nutrition.carbs %>g</br>
-                            <b>Rating:</b> <%= item.rating %></br>
-                            <b>Author:</b> <%= item.author %></br>
-                            </br>
+                            <b>Prep Time:</b> <%= item.prepTime %> minutes<br>
+                            <b>Cook Time:</b> <%= item.cookTime %> minutes<br>
+                            <b>Nutrition:</b> Calories: <%= item.nutrition.calories %>, Protein: <%= item.nutrition.protein %>g, Fat: <%= item.nutrition.fat %>g, Carbs: <%= item.nutrition.carbs %>g<br>
+                            <b>Rating:</b> <%= item.rating %><br>
+                            <b>Author:</b> <%= item.author %><br>
+                            <br>
                         <% }) %>
                     <% } %>
                     <% if (postgresResults.length > 0) { %>
                         <h3>PostgreSQL Results:</h3>
                         <% postgresResults.forEach(item => { %>
-                            <b><%= item.title %></b></br>
-                            <b>Ingredients:</b> <%= item.ingredients.join(', ') %></br>
-                            <b>Instructions:</b> <%= item.instructions %></br>
-                            <b>Cuisine:</b> <%= item.cuisine %></br>
+                            <b><%= item.title %></b><br>
+                            <b>Ingredients:</b> <%= item.ingredients.join(', ') %><br>
+                            <b>Instructions:</b> <%= item.instructions %><br>
+                            <b>Cuisine:</b> <%= item.cuisine %><br>
                             <% if (item.dietaryRestrictions && Array.isArray(item.dietaryRestrictions)) { %>
-                                <b>Dietary Restrictions:</b> <%= item.dietaryRestrictions.join(', ') %></br>
+                                <b>Dietary Restrictions:</b> <%= item.dietaryRestrictions.join(', ') %><br>
                             <% } else { %>
-                                <b>Dietary Restrictions:</b> None</br>
+                                <b>Dietary Restrictions:</b> None<br>
                             <% } %>
-                            <b>Prep Time:</b> <%= item.prepTime %> minutes</br>
-                            <b>Cook Time:</b> <%= item.cookTime %> minutes</br>
-                            <b>Nutrition:</b> Calories: <%= item.nutrition.calories %>, Protein: <%= item.nutrition.protein %>g, Fat: <%= item.nutrition.fat %>g, Carbs: <%= item.nutrition.carbs %>g</br>
-                            <b>Rating:</b> <%= item.rating %></br>
-                            <b>Author:</b> <%= item.author %></br>
-                            </br>
+                            <b>Prep Time:</b> <%= item.prepTime %> minutes<br>
+                            <b>Cook Time:</b> <%= item.cookTime %> minutes<br>
+                            <b>Nutrition:</b> Calories: <%= item.nutrition.calories %>, Protein: <%= item.nutrition.protein %>g, Fat: <%= item.nutrition.fat %>g, Carbs: <%= item.nutrition.carbs %>g<br>
+                            <b>Rating:</b> <%= item.rating %><br>
+                            <b>Author:</b> <%= item.author %><br>
+                            <br>
                         <% }) %>
                     <% } %>
                 <% } else { %>
                     <p>No search results.</p>
                 <% } %>
-
             </form>
         </div>
         <br>
         <%- include('./partials/status.ejs') %>
         <br>
-        </br>
+        <br>
         <%- include('./partials/auth.ejs') %>
         <br>
         <br>
         <a href="#top">Back to top</a>
-
     </body>
     </div>
     <%- include('./partials/footer.ejs') %>
-   
 </html>
