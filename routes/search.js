@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { setToken, authenticateJWT } = require('../services/auth');
 const myEventEmitter = require('../services/logEvents.js');
-
+const db = require("../services/p.db");
 const pDal = require('../services/p.fulltext.dal');
 const mDal = require('../services/m.fulltext.dal');
 
@@ -20,10 +20,23 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { keyword, dataSource } = req.body;
+    const userId = req.session.user ? req.session.user.id : null;
+
+    console.log(`Extracted userId: ${userId}`);
+
+    if (!userId) {
+        return res.status(400).send('User ID is missing.');
+    }
+
     let mongoResults = [];
     let postgresResults = [];
 
     try {
+        await db.query(
+            'INSERT INTO public.keywords (login_id, keywords) VALUES ($1, $2)',
+            [userId, keyword]
+        );
+
         if (dataSource === 'both' || dataSource === 'mongodb') {
             mongoResults = await mDal.getFullText(keyword);
         }
@@ -31,7 +44,6 @@ router.post('/', async (req, res) => {
             postgresResults = await pDal.getFullText(keyword);
         }
 
-        // Send results to the view
         myEventEmitter.emit('event', 'app.post /search', 'INFO', 'search results were displayed.');
         res.render('search', { status: req.session.status, mongoResults, postgresResults });
     } catch (error) {

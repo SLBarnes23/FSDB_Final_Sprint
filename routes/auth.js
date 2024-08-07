@@ -5,12 +5,11 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const myEventEmitter = require('../services/logEvents.js');
 
-const { addLogin, getLoginByUsername } = require('../services/p.auth.dal')
-// const { addLogin, getLoginByUsername } = require('../services/m.auth.dal')
+const { addLogin, getLoginByUsername } = require('../services/p.auth.dal');
 
 router.get('/', async (req, res) => {
     if(DEBUG) console.log('login page: ');
-    res.render('login', {status: req.session.status});
+    res.render('login', { status: req.session.status });
     return;
 });
 
@@ -19,7 +18,7 @@ router.post('/', async (req, res) => {
         if(DEBUG) console.log('auth.getLoginByUsername().try');
         let user = await getLoginByUsername(req.body.username);
         if(user === undefined || user === null) {
-            req.session.status = 'Incorrect user name was entered.'
+            req.session.status = 'Incorrect user name was entered.';
             if(DEBUG) console.log(req.session.status);
             res.redirect('/auth');
             return;
@@ -35,15 +34,15 @@ router.post('/', async (req, res) => {
             }
             myEventEmitter.emit('event', 'auth.post', 'SUCCESS', `User ${user.username} logged in successfully.`);
             if(DEBUG) console.log('auth.post.getLoginByUsername().try _id: ' + user._id);
-            req.session.user = user;
+            req.session.user = { id: user._id, username: user.username };  // Set the user object with correct id
             req.session.token = token;
-            req.session.status = 'Thank you for logging into our service  ' + user.username;
+            req.session.status = 'Thank you for logging into our service ' + user.username;
             res.redirect('/');
             return;
         } else {
             myEventEmitter.emit('event', 'auth.post', 'INVALID', `Incorrect password was entered.`);
-            req.session.status = 'Incorrect password was entered.'
-            res.redirect('/auth')
+            req.session.status = 'Incorrect password was entered.';
+            res.redirect('/auth');
             return;
         }
     } catch (error) {
@@ -55,21 +54,17 @@ router.post('/', async (req, res) => {
     }
 });
 
-// GET (display) the register html page
 router.get('/new', async (req, res) => {
-    res.render('register', {status: req.session.status});
+    res.render('register', { status: req.session.status });
     return;
 });
 
-// POST (register) the new login
 router.post('/new', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         if (req.body.email && req.body.username && req.body.password ) {
             var result = await addLogin(req.body.username, req.body.email, hashedPassword, uuid.v4());
             if(DEBUG) console.log('result: ' + result);
-            // duplicate username, comes from uniqueness constraint 
-            // in postgresql(err.code=23505) OR mongodb(err.code=11000)
             if(result.code === "23505" || result.code === 11000) {
                 let constraint;
                 function setConstraint(indexName) {
@@ -77,13 +72,13 @@ router.post('/new', async (req, res) => {
                         "unique_username": "Username",
                         "unique_email": "Email address"
                     };
-                    return constraintsMap[indexName] || indexName; // Default to indexName if not found
+                    return constraintsMap[indexName] || indexName;
                 }
                 
-                if (result.code === "23505") { // PostgreSQL unique violation
+                if (result.code === "23505") {
                     myEventEmitter.emit('event', 'auth.post /new', 'INFO', `PostgreSQL unique violation: 23505`);
                     constraint = setConstraint(result.constraint);
-                } else if (result.code === 11000) { // MongoDB unique violation
+                } else if (result.code === 11000) {
                     if (DEBUG) console.log(result.errmsg);
                     myEventEmitter.emit('event', 'auth.post /new', 'INFO', `MongoDB unique violation: 11000`);
                     const match = result.errmsg.match(/index: (\w+)/);
@@ -92,40 +87,35 @@ router.post('/new', async (req, res) => {
                     constraint = setConstraint(indexName);
                 }
                 if(DEBUG) console.log(`${constraint} already exists, please try another.`);
-                req.session.status = `${constraint} already exists, please try another.`
-                res.redirect('/auth/new')
+                req.session.status = `${constraint} already exists, please try another.`;
+                res.redirect('/auth/new');
                 return;
             } else {
                 myEventEmitter.emit('event', 'auth.post /new', 'INFO', `New account created.`);
-                req.session.status = 'New account created, please login.'
+                req.session.status = 'New account created, please login.';
                 res.redirect('/auth');
                 return;
             }
         } else {
             if(DEBUG) console.log('Not enough form fields completed.');
-            req.session.status = 'Not enough form fields completed.'
-            res.redirect('/auth/new')
+            req.session.status = 'Not enough form fields completed.';
+            res.redirect('/auth/new');
             return;
         }       
     } catch (error) {
         console.log(error);
-        // log this error to an error log file.
         res.render('503');
         return;
     }
 });
 
-// clear the session
 router.get('/exit', async (req, res) => {
     if(DEBUG) console.log('get /exit');
-    // clear out the express-session
     req.session.destroy((err) => {
         if (err) {
-            // Handle error case
             console.error("Session destruction error:", err);
             return res.status(500).send("Could not log out.");
         } else {
-            // Redirect to home page or login page after successful logout
             res.redirect('/');
             return;
         }
