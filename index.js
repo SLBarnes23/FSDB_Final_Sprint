@@ -43,17 +43,6 @@ app.get('/test-db', async (req, res) => {
     }
 });
 
-// Test Route for PSQL Data
-app.get('/test-search', async (req, res) => {
-    const { query } = req.query;
-    try {
-      const results = await getFullText(query);
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-      res.status(500).send('Error fetching search results');
-    }
-  });
 
 // Routes
 app.get('/', async (req, res) => {
