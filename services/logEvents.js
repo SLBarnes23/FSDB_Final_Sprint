@@ -13,30 +13,30 @@ const myEmitter = new EventEmitter();
 myEmitter.on('event', async (event, level, message) => {
   const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
   const logItem = `${dateTime}\t${level}\t${event}\t${message}\t${uuid()}`;
+  
   try {
-      // Include year when managing log folders
-      const currFolder = '../logs/' + getYear(new Date());
-      if(!fs.existsSync(path.join(__dirname, '../logs/'))) {
-          // if the parent directory logs/ doesn't exist, create it
-          await fsPromises.mkdir(path.join(__dirname, '../logs/'));
-          if(!fs.existsSync(path.join(__dirname, currFolder))) {
-              // create the directory for the year ./logs/yyyy
-              await fsPromises.mkdir(path.join(__dirname, currFolder));
-          }
+      // Determine the log folder based on the log level
+      const logFolder = level === 'ERROR' ? '../logs/errors/' : `../logs/${getYear(new Date())}/`;
+
+      // Check if the folder exists, and create it if it doesn't
+      if (!fs.existsSync(path.join(__dirname, logFolder))) {
+          await fsPromises.mkdir(path.join(__dirname, logFolder), { recursive: true });
       }
-      else {
-          if(!fs.existsSync(path.join(__dirname, currFolder))) {
-              // create the directory for the year ./logs/yyyy
-              await fsPromises.mkdir(path.join(__dirname, currFolder));
-          }
+
+      // Define the log file name and path
+      const fileName = level === 'ERROR' ? 'error_log.log' : `${format(new Date(), 'yyyyMMdd')}_http_events.log`;
+
+      // Append the log item to the appropriate file
+      await fsPromises.appendFile(path.join(__dirname, logFolder, fileName), logItem + '\n');
+
+      // Optionally, log to the console for immediate error visibility
+      if (level === 'ERROR') {
+          console.error(logItem);
       }
-      // Include todays date in filename
-      if(DEBUG) console.log(logItem);
-      const fileName = `${format(new Date(), 'yyyyMMdd')}` + '_http_events.log';
-      await fsPromises.appendFile(path.join(__dirname, currFolder, fileName), logItem + '\n');
+
   } catch (err) {
-      console.log(err);
-  };
+      console.error('Failed to write log:', err);
+  }
 }); 
 
 module.exports = myEmitter;
