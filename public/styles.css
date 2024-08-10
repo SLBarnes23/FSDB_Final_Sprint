@@ -1,88 +1,83 @@
 /* General body styling */
 body {
-    font-family: Arial, sans-serif; /* Default font */
-    margin: 90px;
-    margin-right: 550px; /* Adjusts the right margin */
-    margin-left: 550px;  /* Adjusts the left margin */
-    padding: 0;
-    background-image: url("/images/image-from-rawpixel-id-5926619-original.jpg"); /* Background image */
-    background-repeat: no-repeat; /* Prevents background image from repeating */
-    background-size: cover; /* Scales the background image to cover the entire area */
-    background-position: center; /* Center the image */
-    text-align: center; /* Center-aligns text */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0 5%; /* Add padding to allow content to breathe */
+    background-image: url("/images/image-from-rawpixel-id-5926619-original.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
 }
 
 /* Header styling */
 h1, h2, h3, h4, h5, h6 {
-    color: #333; /* Dark gray color for headers */
+    color: #333;
 }
 
 /* Unordered list styling */
 ul {
-    list-style: none; /* Removes bullet points */
-    padding: 0; /* Removes default padding */
+    list-style: none;
+    padding: 0;
 }
 
 /* List item styling */
 ul li {
-    background: #fff; /* White background */
-    margin: 10px 0; /* Vertical margin */
-    padding: 10px; /* Padding inside the list item */
-    border: 1px solid #ddd; /* Light gray border */
-    border-radius: 4px; /* Rounded corners */
+    background: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 /* Link styling */
 a {
-    text-decoration: none; /* Removes underline from links */
-    color: #1288d6; /* Blue color for links */
-    font-size: 24px;
+    text-decoration: none;
+    color: #1288d6;
+    font-size: 1.5rem; /* Use rem for responsive font size */
 }
 
-/* Link hover effect */
 a:hover {
-    text-decoration: underline; /* Underline on hover */
+    text-decoration: underline;
 }
 
 /* Form styling */
 form {
-    display: inline; /* Displays form inline */
+    display: inline;
 }
 
 /* Button styling */
 button {
-    background-color: #e74c3c; /* Red background color */
-    color: white; /* White text color */
-    border: none; /* No border */
-    padding: 5px 10px; /* Padding inside the button */
-    border-radius: 3px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-/* Button hover effect */
 button:hover {
-    background-color: #57cf95; /* Darker red background on hover */
+    background-color: #57cf95;
 }
 
 /* Custom title styling */
 .playwrite-title {
-    font-family: "Playwrite IS", cursive; /* Custom cursive font */
+    font-family: "Playwrite IS", cursive;
     font-optical-sizing: auto;
-    font-weight: bold; /* Bold text */
-    font-style: bold; /* Bold style */
-    font-size: 60px; /* Large font size */
+    font-weight: bold;
+    font-size: clamp(2.5rem, 5vw, 4rem); /* Use clamp for responsive sizing */
 }
 
 /* Box styling for text sections */
 .textbox {
-    border: 2px solid #383838; /* Dark gray border */
+    border: 2px solid #383838;
     padding: 5px;
-    border-radius: 5px; /* Rounded corners */
-    background-color: #dee8d6; /* White background */
-    width: 100px; /* Fixed width */
-    text-align: center; /* Center-aligns text */
-    align-content: center;
-    margin-left: 266px;
+    border-radius: 5px;
+    background-color: #dee8d6;
+    width: 100%;
+    max-width: 300px; /* Set a max-width for better scalability */
+    text-align: center;
+    margin: 20px auto; /* Centered with auto margins */
 }
 
 /* Header 1 specific styling */
@@ -90,47 +85,52 @@ h1 {
     font-family: "Grenze Gotisch", serif;
     font-optical-sizing: auto;
     font-weight: bolder;
-    font-style: normal;
-    font-size: 80px;
+    font-size: clamp(2rem, 5vw, 4rem);
 }
 
 h2 {
     font-family: "Grenze Gotisch", serif;
     font-optical-sizing: auto;
     font-weight: bolder;
-    font-style: normal;
-    font-size: 40px;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 /* Footer styling */
 footer {
-    font-family: "Playwrite IS", cursive; /* Custom cursive font */
+    font-family: "Playwrite IS", cursive;
     font-optical-sizing: auto;
     font-weight: bold;
-    font-style: bold; /* Bold style */
-    font-size: 17px; /* Medium font size */
+    font-size: 1rem;
 }
 
 .transparentbox {
     background-color: #ffffff71;
-    width: 1300px;
-    margin-right: 300px;
-    margin-left: 300px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    padding-bottom: 30px;
-    padding-top: 10px;
-    padding-right: 20x;
-    padding-left: 20px;
+    width: 80%;
+    max-width: 1300px;
+    margin: 50px auto;
+    padding: 10px 20px;
 }
 
 p {
-    font-size: 17px;
+    font-size: 1rem;
 }
 
 .navbox {
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    width: 700px;
-    font-size: 25px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0 2%; /* Reduce padding on smaller screens */
+    }
+
+    .navbox {
+        flex-direction: column;
+        align-items: center;
+    }
 }
