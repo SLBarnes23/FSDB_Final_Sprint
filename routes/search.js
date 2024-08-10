@@ -32,11 +32,16 @@ router.post('/', async (req, res) => {
     let postgresResults = [];
 
     try {
+        // Log the search keyword along with userId and dataSource
+        myEventEmitter.emit('event', 'app.post /search', 'INFO', `Search keyword: ${keyword}, User ID: ${userId}, Data Source: ${dataSource}`);
+
+        // Insert the keyword into the database
         await db.query(
             'INSERT INTO public.keywords (login_id, keywords) VALUES ($1, $2)',
             [userId, keyword]
         );
 
+        // Get results based on the dataSource selected
         if (dataSource === 'both' || dataSource === 'mongodb') {
             mongoResults = await mDal.getFullText(keyword);
         }
@@ -44,7 +49,9 @@ router.post('/', async (req, res) => {
             postgresResults = await pDal.getFullText(keyword);
         }
 
-        myEventEmitter.emit('event', 'app.post /search', 'INFO', 'search results were displayed.');
+        // Log that search results were displayed
+        myEventEmitter.emit('event', 'app.post /search', 'INFO', 'Search results were displayed.');
+
         res.render('search', { status: req.session.status, mongoResults, postgresResults });
     } catch (error) {
         console.error('Error during search:', error);
