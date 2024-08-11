@@ -1,7 +1,7 @@
 const dal = require("./p.db");
 
 const getFullText = function(text) {
-  if (DEBUG) console.log("postgres.dal.getFullText()");
+  // if (DEBUG) console.log("postgres.dal.getFullText()");
   return new Promise(function(resolve, reject) {
     const sql = `
 SELECT title, ingredients, instructions, cuisine, dietaryRestrictions, prepTime, cookTime, nutrition, rating, author
@@ -13,7 +13,7 @@ WHERE title ILIKE '%' || $1 || '%'
   OR ARRAY_TO_STRING(dietaryRestrictions, ',') ILIKE '%' || $1 || '%'
     `;
 
-    if (DEBUG) console.log(sql);
+    // if (DEBUG) console.log(sql);
     dal.query(sql, [text], (err, result) => {
       if (err) {
         if (DEBUG) console.log(err);

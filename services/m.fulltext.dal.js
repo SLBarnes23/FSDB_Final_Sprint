@@ -2,7 +2,7 @@ const { ObjectId } = require("mongodb");
 const dal = require("./m.db");
 
 async function getFullText(fulltext) {
-  if(DEBUG) console.log("mongo.dal.getFullText()");
+  //if(DEBUG) console.log("mongo.dal.getFullText()");
   try {
     await dal.connect();
     const database = dal.db("Recipeideas");
