@@ -54,4 +54,3 @@ describe('register.ejs', () => {
         expect(rendered).toContain(mockAuth);
         expect(rendered).toContain(mockFooter);
     });
-});

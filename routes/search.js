@@ -6,18 +6,33 @@ const db = require("../services/p.db");
 const pDal = require('../services/p.fulltext.dal');
 const mDal = require('../services/m.fulltext.dal');
 
-// Use the setToken middleware to set the JWT token from the session
+// Middleware to set the token from the session
 router.use(setToken);
 
-// Protect all API routes with the authenticateJWT middleware
+// Middleware to protect all API routes with the authenticateJWT middleware
 router.use(authenticateJWT);
 
+// Debugging
+router.use((req, res, next) => {
+    console.log('Session User:', req.session.user);
+    next();
+});
+
+// Route to get the search page
 router.get('/', async (req, res) => {
-    const theResults = [];
+    // Log that the search page is being displayed
     myEventEmitter.emit('event', 'app.get /search', 'INFO', 'search page (search.ejs) was displayed.');
+
+    // Ensure user is authenticated
+    if (!req.session.user) {
+        req.session.status = 'You must be logged in to view this page.';
+        return res.redirect('/auth');
+    }
+
     res.render('search', { status: req.session.status, mongoResults: [], postgresResults: [] });
 });
 
+// Route to handle search queries
 router.post('/', async (req, res) => {
     const { keyword, dataSource } = req.body;
     const userId = req.session.user ? req.session.user.id : null;

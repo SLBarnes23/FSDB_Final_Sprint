@@ -13,8 +13,7 @@ const authenticateJWT = (req, res, next) => {
             next();
         });
     } else {
-        if(DEBUG) console.log('Status: 401');
-        // return res.sendStatus(401);
+        if (DEBUG) console.log('Status: 401');
         req.session.status = 'Please log in to view this page.';
         res.redirect('/auth');
     }
@@ -26,7 +25,6 @@ const setToken = (req, res, next) => {
     }
     next();
 };
-
 
 module.exports = { 
     authenticateJWT,
