@@ -12,7 +12,7 @@ const myEmitter = new EventEmitter();
 
 myEmitter.on('event', async (event, level, message) => {
   // Debugging output to verify event handling
-  console.log(`Event received: ${event}, Level: ${level}, Message: ${message}`);
+  // console.log(`Event received: ${event}, Level: ${level}, Message: ${message}`); - This was creating double console logs
 
   const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
   const logItem = `${dateTime}\t${level}\t${event}\t${message}\t${uuid()}`;
