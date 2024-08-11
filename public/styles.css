@@ -170,3 +170,68 @@ p {
         font-size: 0.875rem;
     }
 }
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+    background-image: none; /* Optional: Remove background image in dark mode */
+}
+
+/* Header styling for dark mode */
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4, 
+body.dark-mode h5, 
+body.dark-mode h6 {
+    color: #e0e0e0;
+}
+
+/* Container for dark mode */
+body.dark-mode .container {
+    background-color: #1e1e1e;
+}
+
+/* List item styling for dark mode */
+body.dark-mode ul li {
+    background: #333;
+    border: 1px solid #555;
+}
+
+/* Link styling for dark mode */
+body.dark-mode a {
+    color: #bb86fc;
+}
+
+body.dark-mode a:hover {
+    color: #bb86fc;
+    text-decoration: underline;
+}
+
+/* Button styling for dark mode */
+body.dark-mode button {
+    background-color: #444;
+    color: white;
+}
+
+body.dark-mode button:hover {
+    background-color: #57cf95;
+}
+
+/* Box styling for dark mode */
+body.dark-mode .textbox {
+    background-color: #333;
+    border: 2px solid #555;
+}
+
+/* Footer styling for dark mode */
+body.dark-mode footer {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+/* Navigation box styling for dark mode */
+body.dark-mode .navbox {
+    background-color: #2b2b2b;
+}
