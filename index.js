@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const session = require('express-session');
+const passport = require('passport');
 const pool = require('./services/p.db'); // Make sure this file exists
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,29 +21,30 @@ app.use(session({
 
 const myEventEmitter = require('./services/logEvents.js');
 
-app.listen(PORT, (err) => {
-    if (err) console.log(err);
-    myEventEmitter.emit('event', 'app.listen', 'SUCCESS', 'http search site successfully started.');
-    console.log(`Simple app running on port ${PORT}.`)
-});
-
 // Middleware to serve static files from the 'public' directory
 app.use(express.static('public'));
 
 // Middleware to serve static files from the 'images' directory
 app.use(express.static('images'));
 
-// Test route for PostgreSQL connection
-app.get('/test-db', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT NOW()');
-        res.send(`Database connected: ${result.rows[0].now}`);
-    } catch (error) {
-        console.error('Database connection error:', error);
-        res.status(500).send('Database connection error');
+// Middleware to initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Middleware to handle authentication and redirect if not logged in
+app.use((req, res, next) => {
+    const publicRoutes = ['/', '/about', '/auth', '/auth/google', '/api']; // List of public routes that don't require authentication
+    const isPublicRoute = publicRoutes.some(route => req.originalUrl.startsWith(route));
+
+    if (req.isAuthenticated() || isPublicRoute) {
+        // If authenticated or accessing a public route, proceed to next middleware/route
+        return next();
+    } else {
+        // Save the intended URL for redirection after login
+        req.session.redirectTo = req.originalUrl;
+        res.redirect('/auth/google');
     }
 });
-
 
 // Routes
 app.get('/', async (req, res) => {
@@ -68,4 +70,10 @@ app.use('/api', apiRouter);
 // Handle 404 errors
 app.use((req, res) => {
     res.status(404).render('404', { status: req.session.status });
+});
+
+app.listen(PORT, (err) => {
+    if (err) console.log(err);
+    myEventEmitter.emit('event', 'app.listen', 'SUCCESS', 'http search site successfully started.');
+    console.log(`Simple app running on port ${PORT}.`)
 });
