@@ -3,8 +3,9 @@ const {setToken, authenticateJWT } = require('../../services/auth');
 
 if(DEBUG) {
     console.log('API Routes');
-    console.log('ROUTE: /api/auth');
-    console.log('ROUTE: /api/full');
+    console.log('ROUTE: /api/auth/:id');
+    console.log('ROUTE: /api/full/p/:text');
+    console.log('ROUTE: /api/full/m/:text');
 }
 
 // Use the setToken middleware to set the JWT token from the session
