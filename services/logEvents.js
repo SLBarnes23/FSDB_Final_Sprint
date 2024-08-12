@@ -25,7 +25,9 @@ Error-LogEvents
         }
 
         // Define the log file name and path
-        const fileName = (level === 'ERROR' || level === 'WARNING') ? 'error_log.log' : `${format(new Date(), 'yyyyMMdd')}_http_events.log`;
+      // Define the log file name and path
+      const fileName = (level === 'ERROR' || level === 'WARNING') ? 'error_log.log' : `${format(new Date(), 'yyyyMMdd')}_http_events.log`;
+
 
         // Append the log item to the appropriate file
         await fsPromises.appendFile(path.join(__dirname, logFolder, fileName), logItem + '\n');
