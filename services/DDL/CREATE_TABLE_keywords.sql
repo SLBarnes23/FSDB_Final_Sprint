@@ -4,7 +4,7 @@ CREATE TABLE public.keywords
     login_id integer NOT NULL,
     keywords character varying(100) NOT NULL,
     PRIMARY KEY (keyword_id),
-    keywords character varying(50),
+    data_source character varying(50),
 );
 
 ALTER TABLE IF EXISTS public.keywords
