@@ -11,32 +11,33 @@ const EventEmitter = require('events');
 const myEmitter = new EventEmitter(); 
 
 myEmitter.on('event', async (event, level, message) => {
-  const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
-  const logItem = `${dateTime}\t${level}\t${event}\t${message}\t${uuid()}`;
-  
-  try {
-      // Determine the log folder based on the log level
-      const logFolder = level === 'ERROR' ? '../logs/errors/' : `../logs/${getYear(new Date())}/`;
+    const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
+    const logItem = `${dateTime}\t${level}\t${event}\t${message}\t${uuid()}`;
+    
+    try {
+        // Determine the log folder based on the log level
+        const logFolder = (level === 'ERROR' || level === 'WARNING') ? '../logs/errors/' : `../logs/${getYear(new Date())}/`;
 
-      // Check if the folder exists, and create it if it doesn't
-      if (!fs.existsSync(path.join(__dirname, logFolder))) {
-          await fsPromises.mkdir(path.join(__dirname, logFolder), { recursive: true });
-      }
+        // Check if the folder exists, and create it if it doesn't
+        if (!fs.existsSync(path.join(__dirname, logFolder))) {
+            await fsPromises.mkdir(path.join(__dirname, logFolder), { recursive: true });
+        }
 
-      // Define the log file name and path
-      const fileName = level === 'ERROR' ? 'error_log.log' : `${format(new Date(), 'yyyyMMdd')}_http_events.log`;
+        // Define the log file name and path
+        const fileName = (level === 'ERROR' || level === 'WARNING') ? 'error_log.log' : `${format(new Date(), 'yyyyMMdd')}_http_events.log`;
 
-      // Append the log item to the appropriate file
-      await fsPromises.appendFile(path.join(__dirname, logFolder, fileName), logItem + '\n');
+        // Append the log item to the appropriate file
+        await fsPromises.appendFile(path.join(__dirname, logFolder, fileName), logItem + '\n');
 
-      // Optionally, log to the console for immediate error visibility
-      if (level === 'ERROR') {
-          console.error(logItem);
-      }
+        // Optionally, log to the console for immediate error visibility
+        if (level === 'ERROR' || level === 'WARNING') {
+            console.error(logItem);
+        }
 
-  } catch (err) {
-      console.error('Failed to write log:', err);
-  }
+    } catch (err) {
+        console.error('Failed to write log:', err);
+    }
 }); 
+
 
 module.exports = myEmitter;
