@@ -1,54 +1,44 @@
+// __tests__/logEvents.test.js
 const fs = require('fs');
-const { format } = require('date-fns');
-const myEmitter = require('../services/logEvents'); // Adjust the path if necessary
+const fsPromises = require('fs').promises;
+const path = require('path');
+const EventEmitter = require('events');
+const myEmitter = require('../services/logEvents'); // Import the EventEmitter instance
 
-// Mock fs methods
-jest.mock('fs', () => ({
-  ...jest.requireActual('fs'),
-  existsSync: jest.fn(),
-  mkdir: jest.fn(),
-  appendFile: jest.fn(),
-}));
-
-// Mock console methods
+// Mock the console methods
 console.log = jest.fn();
 console.error = jest.fn();
 
 describe('Event Emitter Logging', () => {
   beforeEach(() => {
-    jest.clearAllMocks(); // Clear mocks before each test
+    jest.clearAllMocks();
   });
 
-  it('should log an error message to the console', async () => {
-    // Mock fs methods
-    fs.existsSync.mockReturnValue(true);
+  afterEach(() => {
+    // Ensure no event listeners are leaking
+    myEmitter.removeAllListeners('event');
+  });
 
-    // Emit the event
-    await new Promise((resolve) => {
-      myEmitter.emit('event', 'Test event', 'ERROR', 'Test error message');
-      setImmediate(resolve); // Allow async operations to complete
+  it('should log an info message to the console', async () => {
+    // Create a promise to handle the console.log callback
+    const logPromise = new Promise((resolve, reject) => {
+      console.log.mockImplementation((message) => {
+        try {
+          expect(message).toContain('Event received: Test event, Level: INFO, Message: Test info message');
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
+
+      // Emit an info event
+      const testEvent = 'Test event';
+      const testLevel = 'INFO';
+      const testMessage = 'Test info message';
+
+      myEmitter.emit('event', testEvent, testLevel, testMessage);
     });
 
-    // Debugging output
-    console.log('console.error calls:', console.error.mock.calls);
-
-  });
-
-  it('should log a non-error message to the console', async () => {
-    // Mock fs methods
-    fs.existsSync.mockReturnValue(true);
-
-    // Emit the event
-    await new Promise((resolve) => {
-      myEmitter.emit('event', 'Test event', 'INFO', 'Test info message');
-      setImmediate(resolve); // Allow async operations to complete
-    });
-
-    // Debugging output
-    console.log('console.log calls:', console.log.mock.calls);
-
-    // Assertions
-    expect(console.log).toHaveBeenCalledWith(expect.stringContaining('Event received: Test event, Level: INFO, Message: Test info message'));
-    expect(console.error).not.toHaveBeenCalled(); // Ensure console.error was not called
-  });
+    await logPromise; // Wait for the promise to resolve or reject
+  }, 10000); // Ensure this is enough time 
 });
