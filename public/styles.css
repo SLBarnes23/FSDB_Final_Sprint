@@ -1,33 +1,33 @@
 /* General body styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; 
     margin: 0;
     padding: 0;
-    background-image: url("/images/image-from-rawpixel-id-5926619-original.jpg");
+    background-image: url("/images/image-from-rawpixel-id-5926619-original.jpg"); 
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     text-align: center;
 }
- 
+
 /* Container for centering content */
 .container {
     max-width: 1200px; /* Maximum width for content */
     margin: 0 auto; /* Center content */
     padding: 20px; /* Padding for content */
 }
- 
+
 /* Header styling */
 h1, h2, h3, h4, h5, h6 {
     color: #333;
 }
- 
+
 /* Unordered list styling */
 ul {
     list-style: none;
     padding: 0;
 }
- 
+
 /* List item styling */
 ul li {
     background: #fff;
@@ -36,24 +36,24 @@ ul li {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
- 
+
 /* Link styling */
 a {
     text-decoration: none;
     color: #1288d6;
     font-size: 24px;
 }
- 
+
 /* Link hover effect */
 a:hover {
     text-decoration: underline;
 }
- 
+
 /* Form styling */
 form {
     display: inline;
 }
- 
+
 /* Button styling */
 button {
     background-color: #e74c3c;
@@ -63,19 +63,19 @@ button {
     border-radius: 3px;
     cursor: pointer;
 }
- 
+
 /* Button hover effect */
 button:hover {
     background-color: #57cf95;
 }
- 
+
 /* Custom title styling */
 .playwrite-title {
     font-family: "Playwrite IS", cursive;
     font-weight: bold;
     font-size: 3.75rem; /* Responsive font size */
 }
- 
+
 /* Box styling for text sections */
 .textbox {
     border: 2px solid #383838;
@@ -86,20 +86,20 @@ button:hover {
     max-width: 100%; /* Ensures it doesn't overflow */
     margin: 20px auto; /* Centers the box */
 }
- 
+
 /* Header 1 specific styling */
 h1 {
     font-family: "Grenze Gotisch", serif;
     font-weight: bolder;
     font-size: 4rem; /* Responsive font size */
 }
- 
+
 h2 {
     font-family: "Grenze Gotisch", serif;
     font-weight: bolder;
     font-size: 2rem; /* Responsive font size */
 }
- 
+
 /* Footer styling */
 footer {
     font-family: "Playwrite IS", cursive;
@@ -107,7 +107,7 @@ footer {
     font-size: 1rem;
     padding: 10px 0; /* Padding for spacing */
 }
- 
+
 /* Transparent box styling */
 .transparentbox {
     background-color: rgba(255, 255, 255, 0.453);
@@ -116,12 +116,12 @@ footer {
     margin: 50px auto; /* Centers the box */
     padding: 20px;
 }
- 
+
 /* Paragraph styling */
 p {
     font-size: 1rem;
 }
- 
+
 /* Navigation box styling */
 .navbox {
     display: flex;
@@ -132,40 +132,40 @@ p {
     margin: 0 auto;
     font-size: 1.5rem; /* Responsive font size */
 }
- 
+
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
     .container {
         padding: 10px;
     }
- 
+
     .playwrite-title {
         font-size: 2.5rem;
     }
- 
+
     .transparentbox {
         width: 95%;
         margin: 20px auto;
     }
- 
+
     h1 {
         font-size: 2.5rem;
     }
- 
+
     h2 {
         font-size: 1.5rem;
     }
- 
+
     button {
         padding: 8px 15px;
     }
- 
+
     .navbox {
         flex-direction: column;
         align-items: center;
         font-size: 1.25rem;
     }
- 
+
     p {
         font-size: 0.875rem;
     }

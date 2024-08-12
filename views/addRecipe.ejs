@@ -1,0 +1,90 @@
+<html lang="en">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/738bb60142.js" crossorigin="anonymous"></script>
+    <div class="transparentbox">
+    <%- include('./partials/header.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="search content">
+            <h1>Add a New Recipe</h1>
+            <!-- Button to load example data -->
+<button type="button" id="loadExampleData">Load Example Recipe</button>
+<br>
+<br>
+            <form action="/recipes/add" method="POST">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required><br><br>
+        
+                <label for="ingredients">Ingredients (comma-separated):</label>
+                <input type="text" id="ingredients" name="ingredients" required><br><br>
+        
+                <label for="cuisine">Cuisine:</label>
+                <input type="text" id="cuisine" name="cuisine"><br><br>
+        
+                <label for="dietaryRestrictions">Dietary Restrictions (comma-separated):</label>
+                <input type="text" id="dietaryRestrictions" name="dietaryRestrictions"><br><br>
+        
+                <label for="prepTime">Prep Time (minutes):</label>
+                <input type="number" id="prepTime" name="prepTime"><br><br>
+        
+                <label for="cookTime">Cook Time (minutes):</label>
+                <input type="number" id="cookTime" name="cookTime"><br><br>
+        
+                <label for="instructions">Instructions:</label><br>
+                <textarea id="instructions" name="instructions" rows="4" cols="50"></textarea><br><br>
+        
+                <label for="nutrition">Nutrition (JSON format):</label><br>
+                <textarea id="nutrition" name="nutrition" rows="4" cols="50"></textarea><br><br>
+        
+                <label for="rating">Rating:</label>
+                <input type="number" id="rating" name="rating" step="0.1" min="0" max="5"><br><br>
+        
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author"><br><br>
+        
+                <button type="submit">Add Recipe</button>
+            </form>
+        </div>
+        <br>
+        <%- include('./partials/status.ejs') %>
+        <br>
+        <br>
+        <%- include('./partials/auth.ejs') %>
+        <br> <script>
+            document.getElementById('loadExampleData').addEventListener('click', function() {
+                const exampleRecipe = {
+                    title: "Garlic Butter Shrimp",
+                    ingredients: "shrimp, garlic, butter, lemon juice, parsley, salt, pepper",
+                    cuisine: "American",
+                    dietaryRestrictions: "pescatarian, gluten-free",
+                    prepTime: 5,
+                    cookTime: 10,
+                    instructions: "Melt butter in a large pan over medium heat. Add minced garlic and sauté until fragrant. Add shrimp and cook until pink and opaque, about 3-4 minutes per side. Stir in lemon juice and chopped parsley. Season with salt and pepper. Serve immediately with a side of your choice.",
+                    nutrition: '{"calories": 250, "protein": 20, "fat": 15, "carbs": 3}',
+                    rating: 4.7,
+                    author: "Chef Maria"
+                };
+        
+                document.getElementById('title').value = exampleRecipe.title;
+                document.getElementById('ingredients').value = exampleRecipe.ingredients;
+                document.getElementById('cuisine').value = exampleRecipe.cuisine;
+                document.getElementById('dietaryRestrictions').value = exampleRecipe.dietaryRestrictions;
+                document.getElementById('prepTime').value = exampleRecipe.prepTime;
+                document.getElementById('cookTime').value = exampleRecipe.cookTime;
+                document.getElementById('instructions').value = exampleRecipe.instructions;
+                document.getElementById('nutrition').value = exampleRecipe.nutrition;
+                document.getElementById('rating').value = exampleRecipe.rating;
+                document.getElementById('author').value = exampleRecipe.author;
+            });
+        </script>
+        <br>
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+        <script src="/darkmode.js"></script>
+        <br>
+        <br>
+    </body>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+</html>

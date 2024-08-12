@@ -1,0 +1,60 @@
+<html lang="en">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/738bb60142.js" crossorigin="anonymous"></script>
+    <div class="transparentbox">
+        <%- include('./partials/header.ejs') %>
+        <body>
+            <%- include('./partials/nav.ejs') %>
+            <div class="content">
+                <h1>Recipe List</h1>
+
+                <h2>PostgreSQL Recipes</h2>
+                <ul>
+                    <% recipes.postgres.forEach(recipe => { %>
+                        <li>
+                            <h3><%= recipe.title %></h3>
+                            <p><strong>Cuisine:</strong> <%= recipe.cuisine %></p>
+                            <p><strong>Ingredients:</strong> <%= recipe.ingredients.join(', ') %></p>
+                            <p><strong>Prep Time:</strong> <%= recipe.prepTime %> minutes</p>
+                            <p><strong>Cook Time:</strong> <%= recipe.cookTime %> minutes</p>
+                            <p><strong>Instructions:</strong> <%= recipe.instructions %></p>
+                            <p><strong>Rating:</strong> <%= recipe.rating %></p>
+                            <p><strong>Author:</strong> <%= recipe.author %></p>
+                        </li>
+                    <% }) %>
+                </ul>
+
+                <h2>MongoDB Recipes</h2>
+                <ul>
+                    <% recipes.mongo.forEach(recipe => { %>
+                        <li>
+                            <h3><%= recipe.title %></h3>
+                            <p><strong>Cuisine:</strong> <%= recipe.cuisine %></p>
+                            <p><strong>Ingredients:</strong> <%= recipe.ingredients.join(', ') %></p>
+                            <p><strong>Prep Time:</strong> <%= recipe.prepTime %> minutes</p>
+                            <p><strong>Cook Time:</strong> <%= recipe.cookTime %> minutes</p>
+                            <p><strong>Instructions:</strong> <%= recipe.instructions %></p>
+                            <p><strong>Rating:</strong> <%= recipe.rating %></p>
+                            <p><strong>Author:</strong> <%= recipe.author %></p>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+
+            <br>
+            <%- include('./partials/status.ejs') %>
+            <br>
+            <%- include('./partials/auth.ejs') %>
+            <br>
+            <button id="darkModeToggle">Toggle Dark Mode</button>
+            <script src="/darkmode.js"></script>
+            <script src="/js/darkmode.js"></script>
+            <br>
+            <br>
+            <a href="#top">Back to top</a>
+        </body>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+</html>
