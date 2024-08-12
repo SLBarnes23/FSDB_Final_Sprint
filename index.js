@@ -57,19 +57,26 @@ app.get('/about', (req, res) => {
 
 // Routes with single event emission middleware
 app.use('/search', (req, res, next) => {
-     myEventEmitter.emit('event', 'search route', 'INFO', `Search route accessed: ${req.originalUrl}`);
+    myEventEmitter.emit('event', 'search route', 'INFO', `Search route accessed: ${req.originalUrl}`);
     next();
 }, require('./routes/search'));
 
 app.use('/auth', (req, res, next) => {
-     myEventEmitter.emit('event', 'auth route', 'INFO', `Auth route accessed: ${req.originalUrl}`);
+    myEventEmitter.emit('event', 'auth route', 'INFO', `Auth route accessed: ${req.originalUrl}`);
     next();
 }, require('./routes/auth'));
 
+// Log API route accesses
 app.use('/api', (req, res, next) => {
     myEventEmitter.emit('event', 'api route', 'INFO', `API route accessed: ${req.originalUrl}`);
     next();
 }, require('./routes/api'));
+
+// Add the recipes route
+app.use('/recipes', (req, res, next) => {
+    myEventEmitter.emit('event', 'recipes route', 'INFO', `Recipes route accessed: ${req.originalUrl}`);
+    next();
+}, require('./routes/recipes'));
 
 // Handle 404 errors
 app.use((req, res) => {

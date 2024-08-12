@@ -50,10 +50,10 @@ router.post('/', async (req, res) => {
         // Log the search keyword along with userId and dataSource
         myEventEmitter.emit('event', 'app.post /search', 'INFO', `Search keyword: ${keyword}, User ID: ${userId}, Data Source: ${dataSource}`);
 
-        // Insert the keyword into the database
+        // Insert the keyword into the database with the data source
         await db.query(
-            'INSERT INTO public.keywords (login_id, keywords) VALUES ($1, $2)',
-            [userId, keyword]
+            'INSERT INTO public.keywords (login_id, keywords, data_source) VALUES ($1, $2, $3)',
+            [userId, keyword, dataSource]
         );
 
         // Get results based on the dataSource selected
